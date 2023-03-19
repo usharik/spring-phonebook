@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <title>Person</title>
+</head>
+
+<body>
+
+<nav th:replace="fragment/head.html :: navigation" class="navbar navbar-expand-lg navbar-light bg-light">
+</nav>
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12">
+            <form th:action="@{/person}" th:object="${person}" th:method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" th:field="*{firstName}" id="firstName" class="form-control"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="Surname">Surname</label>
+                    <input type="text" th:field="*{surname}" id="Surname" class="form-control"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="patronymic">Patronymic</label>
+                    <input type="text" th:field="*{patronymic}" id="patronymic" class="form-control"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" th:field="*{city}" id="city" class="form-control"  placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="street">Street</label>
+                    <select th:field="*{streetId}" id="street">
+                        <option th:each="street : ${streets}" th:value="${street.id}" th:text="${street.streetName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="buildingNumber">Building Number</label>
+                    <input type="number" th:field="*{buildingNumber}" id="buildingNumber" class="form-control"  placeholder="Enter name">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragment/footer.html :: scripts">
+</th:block>
+
+</body>
+
+</html>
