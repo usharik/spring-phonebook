@@ -2,6 +2,9 @@ package ru.phonebook.controllers.dto;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -22,4 +25,6 @@ public class PersonWithAddressDto {
     private Long streetId;
 
     private String buildingNumber;
+
+    private List<PhoneDto> phones = new ArrayList<>();
 }

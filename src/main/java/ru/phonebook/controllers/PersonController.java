@@ -3,11 +3,9 @@ package ru.phonebook.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.phonebook.controllers.dto.PersonWithAddressDto;
+import ru.phonebook.controllers.dto.PhoneDto;
 import ru.phonebook.persist.StreetRepository;
 import ru.phonebook.service.PersonService;
 
@@ -18,6 +16,11 @@ public class PersonController {
     private final PersonService personService;
 
     private final StreetRepository streetRepository;
+
+    @ModelAttribute
+    public void commonAttributes(Model model) {
+        model.addAttribute("streets", streetRepository.findAll());
+    }
 
     @Autowired
     public PersonController(PersonService personService, StreetRepository streetRepository) {
@@ -34,7 +37,6 @@ public class PersonController {
     @GetMapping("/new")
     public String create(Model model) {
         model.addAttribute("person", new PersonWithAddressDto());
-        model.addAttribute("streets", streetRepository.findAll());
         return "person_form";
     }
 
@@ -42,7 +44,6 @@ public class PersonController {
     public String edit(@PathVariable Long id, Model model) {
         model.addAttribute("person", personService.findById(id)
                 .orElseThrow(() -> new NotFoundException("No person with id " + id)));
-        model.addAttribute("streets", streetRepository.findAll());
         return "person_form";
     }
 
@@ -50,5 +51,18 @@ public class PersonController {
     public String savePerson(PersonWithAddressDto dto) {
         personService.savePersonWithAddress(dto);
         return "redirect:/person";
+    }
+
+    @PostMapping(params = {"addPhoneInput"})
+    public String addPhoneInput(@ModelAttribute("person") PersonWithAddressDto person, Model model) {
+        person.getPhones().add(new PhoneDto());
+        return "person_form";
+    }
+
+    @PostMapping(params = {"removePhoneInputIndex"})
+    public String removePhoneInput(@RequestParam int removePhoneInputIndex,
+                                   @ModelAttribute("person") PersonWithAddressDto person, Model model) {
+        person.getPhones().remove(removePhoneInputIndex);
+        return "person_form";
     }
 }

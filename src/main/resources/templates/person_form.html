@@ -15,7 +15,7 @@
 
 <body>
 
-<nav th:replace="fragment/head.html :: navigation" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav th:replace="~{fragment/head.html :: navigation}" class="navbar navbar-expand-lg navbar-light bg-light">
 </nav>
 
 <div class="container">
@@ -37,11 +37,11 @@
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" th:field="*{city}" id="city" class="form-control"  placeholder="Enter name">
+                    <input type="text" th:field="*{city}" id="city" class="form-control" placeholder="Enter name">
                 </div>
                 <div class="form-group">
                     <label for="street">Street</label>
-                    <select th:field="*{streetId}" id="street">
+                    <select th:field="*{streetId}" id="street" class="form-control">
                         <option th:each="street : ${streets}" th:value="${street.id}" th:text="${street.streetName}"></option>
                     </select>
                 </div>
@@ -50,13 +50,48 @@
                     <input type="number" th:field="*{buildingNumber}" id="buildingNumber" class="form-control"  placeholder="Enter name">
                 </div>
 
+                <table class="table table-bordered my-2">
+                    <tr>
+                        <th colspan="3">
+                            <button type="submit" name="addPhoneInput" class="btn btn-primary">Add row</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Phone</th>
+                        <th>Phone type</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:unless="*{phones.empty}" th:each="phone, phoneStat : *{phones}">
+                        <td th:text="${phoneStat.index + 1}"></td>
+                        <td>
+                            <input type="hidden" th:field="*{phones[__${phoneStat.index}__].id}">
+                            <input type="text" th:field="*{phones[__${phoneStat.index}__].number}" class="form-control">
+                        </td>
+                        <td>
+                            <select th:field="*{phones[__${phoneStat.index}__].phoneType}" class="form-control">
+                                <option value="HOME_PHONE">Home phone</option>
+                                <option value="WORK_PHONE">Work phone</option>
+                                <option value="MOBILE_PHONE">Mobile phone</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" name="removePhoneInputIndex" class="btn btn-danger"
+                                    th:value="${phoneStat.index}">Remove row</button>
+                        </td>
+                    </tr>
+                    <tr th:if="*{phones.empty}">
+                        <td colspan="3">No phones</td>
+                    </tr>
+                </table>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 </div>
 
-<th:block th:replace="fragment/footer.html :: scripts">
+<th:block th:replace="~{fragment/footer.html :: scripts}">
 </th:block>
 
 </body>
