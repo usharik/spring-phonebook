@@ -47,22 +47,22 @@ public class PersonController {
         return "person_form";
     }
 
-    @PostMapping
-    public String savePerson(PersonWithAddressDto dto) {
-        personService.savePersonWithAddress(dto);
-        return "redirect:/person";
-    }
-
     @PostMapping(params = {"addPhoneInput"})
-    public String addPhoneInput(@ModelAttribute("person") PersonWithAddressDto person, Model model) {
+    public String addPhoneInput(@ModelAttribute("person") PersonWithAddressDto person) {
         person.getPhones().add(new PhoneDto());
         return "person_form";
     }
 
     @PostMapping(params = {"removePhoneInputIndex"})
     public String removePhoneInput(@RequestParam int removePhoneInputIndex,
-                                   @ModelAttribute("person") PersonWithAddressDto person, Model model) {
+                                   @ModelAttribute("person") PersonWithAddressDto person) {
         person.getPhones().remove(removePhoneInputIndex);
         return "person_form";
+    }
+
+    @PostMapping
+    public String savePerson(PersonWithAddressDto dto) {
+        personService.savePersonWithAddress(dto);
+        return "redirect:/person";
     }
 }

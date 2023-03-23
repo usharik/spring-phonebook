@@ -90,13 +90,12 @@ public class PersonService {
                     .collect(Collectors.toMap(PhoneDto::getId, ph -> ph));
 
             // update existing phones
-            person.getPhones().replaceAll(phone -> {
+            person.getPhones().forEach(phone -> {
                 PhoneDto phoneDto = phoneDtoMap.get(phone.getId());
                 if (phoneDto != null) {
                     phone.setNumber(phoneDto.getNumber());
                     phone.setPhoneType(PhoneType.valueOf(phoneDto.getPhoneType()));
                 }
-                return phone;
             });
             // remove deleted phones
             person.getPhones().removeIf(phone -> phoneDtoMap.get(phone.getId()) == null);
