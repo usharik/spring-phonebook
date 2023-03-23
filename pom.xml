@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.phonebook</groupId>
-    <artifactId>spting-phonebook</artifactId>
+    <artifactId>spring-phonebook</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spting-phonebook</name>
-    <description>spting-phonebook</description>
+    <name>spring-phonebook</name>
+    <description>spring-phonebook</description>
     <properties>
         <java.version>17</java.version>
     </properties>
