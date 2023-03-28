@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.4</version>
+        <version>3.0.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.phonebook</groupId>
-    <artifactId>spring-phonebook</artifactId>
+    <groupId>ru.sunrise</groupId>
+    <artifactId>phonebook-spring-mvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-phonebook</name>
-    <description>spring-phonebook</description>
+    <name>phonebook-spring-mvc</name>
+    <description>phonebook-spring-mvc</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -33,10 +33,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -44,10 +40,20 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

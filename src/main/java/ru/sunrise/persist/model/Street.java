@@ -1,4 +1,4 @@
-package ru.phonebook.persist.model;
+package ru.sunrise.persist.model;
 
 import jakarta.persistence.*;
 import lombok.*;

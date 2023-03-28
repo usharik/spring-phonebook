@@ -1,18 +1,14 @@
-package ru.phonebook.controllers;
+package ru.sunrise.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.phonebook.persist.StreetRepository;
-import ru.phonebook.persist.model.Street;
+import org.springframework.web.bind.annotation.*;
+import ru.sunrise.persist.StreetRepository;
+import ru.sunrise.persist.model.Street;
+
 
 @Slf4j
 @RequestMapping("/street")
@@ -49,5 +45,10 @@ public class StreetController {
     public String save(Street street) {
         streetRepository.save(street);
         return "redirect:/street";
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") long id) {
+        streetRepository.deleteById(id);
     }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags -->
@@ -21,7 +21,21 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/person/new}">Add Person</a>
+            <a class="btn btn-primary" th:href="@{/person/new}">Добавить абонента</a>
+        </div>
+
+        <div class="col-12 mt-3">
+            <form class="form-inline" th:action="@{/person}">
+                <input type="text" class="form-control mb-2 mr-sm-2" th:value="${param.filterSurname}"
+                       id="filterSurname" name="filterSurname" placeholder="Фильтр по фамилия">
+                <input type="text" class="form-control mb-2 mr-sm-2" th:value="${param.filterName}"
+                       id="filterName" name="filterName" placeholder="Фильтр по имени">
+                <input type="text" class="form-control mb-2 mr-sm-2" th:value="${param.filterPhone}"
+                       id="filterPhone" name="filterPhone" placeholder="Фильтр по телефону">
+                <button class="btn btn-primary mb-2 mr-sm-2" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
 
         <div class="col-12">
@@ -31,7 +45,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">First name</th>
                     <th scope="col">Surname</th>
-                    <th scope="col">Patronimic</th>
+                    <th scope="col">Patronymic</th>
                     <th scope="col">Address</th>
                     <th scope="col">Phones</th>
                     <th scope="col">Actions</th>
@@ -49,9 +63,16 @@
                     <td th:text="${person.address}">Address</td>
                     <td th:text="${person.phones}">Phones</td>
                     <td>
-                        <a class="btn btn-success" th:href="@{/person/{id}(id = ${person.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" href="#"><i class="far fa-trash-alt"></i></a>
+                        <a class="btn btn-success" th:href="@{/person/{id}(id = ${person.id})}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form class="d-inline" th:method="DELETE" th:action="@{/person/{id}(id = ${person.id})}">
+                            <button class="btn btn-danger" type="submit">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </form>
                     </td>
+
                 </tr>
                 </tbody>
             </table>

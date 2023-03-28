@@ -1,7 +1,8 @@
-package ru.phonebook.persist.model;
+package ru.sunrise.persist.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ru.sunrise.controllers.dto.PhoneDto;
 
 
 @Getter
@@ -21,11 +22,15 @@ public class Phone {
     @Column(name = "number", nullable = false)
     private String number;
 
-    @Column(name = "phone_type", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    @ToString.Exclude
     private PhoneType phoneType;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "person_id")
     private Person owner;
+
+    public Phone(Phone phone, Person person) {
+    }
 }

@@ -1,4 +1,4 @@
-package ru.phonebook.persist.model;
+package ru.sunrise.persist.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -19,7 +19,6 @@ public class Address {
     private Long id;
 
     @Column(name = "city", nullable = false)
-    @NotEmpty
     private String city;
 
     @Column(name = "building_number")

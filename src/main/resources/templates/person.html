@@ -21,7 +21,7 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <form th:action="@{/person}" th:object="${person}" th:method="post">
+            <form th:action="@{/person}" th:object="${person}" th:method="get">
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">
                     <label for="firstName">First name</label>
@@ -53,41 +53,41 @@
                 </div>
 
                 <div class="form-group">
-                <table class="table table-bordered my-2">
-                    <tr>
-                        <th colspan="3">
-                            <button type="submit" name="addPhone" class="btn btn-primary">Добавить телефон</button>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>№</th>
-                        <th>Phone</th>
-                        <th>Phone type</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr th:unless="*{phones.empty}" th:each="phone, phoneStat : *{phones}">
-                        <td th:text="${phoneStat.count}">1</td>
-                        <td>
-                            <input type="hidden" th:field="*{phones[__${phoneStat.index}__].id}">
-                            <input type="text" th:field="*{phones[__${phoneStat.index}__].number}" class="form-control">
-                        </td>
-                        <td>
-                            <select th:field="*{phones[__${phoneStat.index}__].phoneType}" class="form-control">
-                                <option th:each="phType : ${phoneTypes}"
-                                        th:text="${phType.typeName}"
-                                        th:value="${phType.id}">
-                                </option>
-                            </select>
-                        </td>
-                        <td>
-                            <button type="submit" name="removePhone" class="btn btn-danger"
-                                    th:value="${phoneStat.index}">Удалить телефон</button>
-                        </td>
-                    </tr>
-                    <tr th:if="*{phones.empty}">
-                        <td colspan="3">No phones</td>
-                    </tr>
-                </table>
+                    <table class="table table-bordered my-2">
+                        <tr>
+                            <th colspan="3">
+                                <button type="submit" name="addPhone" class="btn btn-primary">Добавить телефон</button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>№</th>
+                            <th>Phone</th>
+                            <th>Phone type</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr th:each="phone, phoneStat : *{phones}">
+                            <td th:text="${phoneStat.count}">1</td>
+                            <td>
+                                <input type="hidden" th:field="*{phones[__${phoneStat.index}__].id}">
+                                <input type="text" th:field="*{phones[__${phoneStat.index}__].number}" class="form-control">
+                            </td>
+                            <td>
+                                <select th:field="*{phones[__${phoneStat.index}__].phoneType}" class="form-control">
+                                    <option th:each="phType : ${phoneTypes}"
+                                            th:text="${phType.typeName}"
+                                            th:value="${phType.id}">
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" name="removePhone" class="btn btn-danger"
+                                        th:value="${phoneStat.index}">Удалить телефон</button>
+                            </td>
+                        </tr>
+                        <tr th:if="*{phones.empty}">
+                            <td colspan="3">No phones</td>
+                        </tr>
+                    </table>
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </form>

@@ -1,4 +1,4 @@
-package ru.phonebook.persist.model;
+package ru.sunrise.persist.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -22,18 +22,15 @@ public class Person {
     private Long id;
 
     @Column(name = "first_name", nullable = false)
-    @NotEmpty
     private String firstName;
 
     @Column(name = "surname", nullable = false)
-    @NotEmpty
     private String surname;
 
     @Column(name = "patronymic", nullable = false)
-    @NotEmpty
     private String patronymic;
 
-    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)

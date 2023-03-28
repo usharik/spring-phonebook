@@ -1,4 +1,4 @@
-package ru.phonebook.controllers;
+package ru.sunrise.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

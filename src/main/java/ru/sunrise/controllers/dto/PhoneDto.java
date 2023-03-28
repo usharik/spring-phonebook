@@ -1,6 +1,7 @@
-package ru.phonebook.controllers.dto;
+package ru.sunrise.controllers.dto;
 
 import lombok.*;
+import ru.sunrise.persist.model.PhoneType;
 
 @Getter
 @Setter
@@ -13,5 +14,5 @@ public class PhoneDto {
 
     private String number;
 
-    private String phoneType;
+    private PhoneType phoneType;
 }

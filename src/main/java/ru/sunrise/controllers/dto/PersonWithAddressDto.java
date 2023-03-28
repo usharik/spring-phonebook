@@ -1,4 +1,4 @@
-package ru.phonebook.controllers.dto;
+package ru.sunrise.controllers.dto;
 
 import lombok.*;
 

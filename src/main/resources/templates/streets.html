@@ -42,7 +42,7 @@
                     <td th:text="${street.streetName}">Some street</td>
                     <td>
                         <a class="btn btn-success" th:href="@{/street/{id}(id = ${street.id})}"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-danger" href="#"><i class="far fa-trash-alt"></i></a>
+                        <a class="btn btn-danger" th:href="@{/street/{id}(id = ${street.id})}"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
                 </tbody>
