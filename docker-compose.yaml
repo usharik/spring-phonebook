@@ -7,5 +7,17 @@ services:
       POSTGRES_DB: phonebook_db
       POSTGRES_PASSWORD: postgres
     ports:
-      - 5432:5432
+      - "5432"
+    volumes:
+      - database-data:/var/lib/postgresql/data/
 
+  phonebook:
+    image: spring-phonebook:latest
+    restart: always
+    environment:
+      DATABASE_URL: db
+    ports:
+      - "8081:8080"
+
+volumes:
+  database-data:

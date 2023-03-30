@@ -1,12 +1,13 @@
 package ru.sunrise.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.sunrise.controllers.dto.PersonWithAddressDto;
 import ru.sunrise.controllers.dto.PhoneDto;
-import ru.sunrise.persist.PhoneRepository;
 import ru.sunrise.persist.PhoneTypeRepository;
 import ru.sunrise.persist.StreetRepository;
 import ru.sunrise.service.PersonService;
@@ -20,7 +21,6 @@ public class PersonController {
     private final PersonService personService;
     private final StreetRepository streetRepository;
     private final PhoneTypeRepository phoneTypeRepository;
-    private final PhoneRepository phoneRepository;
 
     @ModelAttribute
     public void commonAttributes(Model model) {
@@ -30,11 +30,10 @@ public class PersonController {
 
     @Autowired
     public PersonController(PersonService personService, StreetRepository streetRepository,
-                            PhoneTypeRepository phoneTypeRepository, PhoneRepository phoneRepository) {
+                            PhoneTypeRepository phoneTypeRepository) {
         this.personService = personService;
         this.streetRepository = streetRepository;
         this.phoneTypeRepository = phoneTypeRepository;
-        this.phoneRepository = phoneRepository;
     }
 
     @GetMapping
@@ -87,7 +86,11 @@ public class PersonController {
     }
 
     @PostMapping
-    public String savePerson(PersonWithAddressDto dto) {
+    public String savePerson(@Valid @ModelAttribute("person") PersonWithAddressDto dto,
+                             BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "person_form";
+        }
         personService.savePersonWithAddress(dto);
         return "redirect:/person";
     }

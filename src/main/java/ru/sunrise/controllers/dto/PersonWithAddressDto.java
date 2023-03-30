@@ -1,5 +1,6 @@
 package ru.sunrise.controllers.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -14,8 +15,10 @@ public class PersonWithAddressDto {
 
     private Long id;
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String surname;
 
     private String patronymic;
