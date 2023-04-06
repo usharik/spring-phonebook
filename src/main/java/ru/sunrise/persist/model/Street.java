@@ -1,5 +1,6 @@
 package ru.sunrise.persist.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +24,7 @@ public class Street {
     @Column(name = "street_name", nullable = false)
     private String streetName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "street", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Address> addresses = new ArrayList<>();
